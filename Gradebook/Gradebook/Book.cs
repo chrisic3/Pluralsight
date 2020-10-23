@@ -4,14 +4,14 @@ using System.Text;
 
 namespace Gradebook
 {
-    class Book
+    public class Book
     {
-        private string name;
+        public string Name;
         private List<double> grades;
 
         public Book(string name)
         {
-            this.name = name;
+            this.Name = name;
             grades = new List<double>();
         }
 
@@ -20,24 +20,23 @@ namespace Gradebook
             grades.Add(grade);
         }
         
-        public void ShowStatistics()
+        public Statistics GetStatistics()
         {
-            double result = 0.0;
-            double highGrade = double.MinValue;
-            double lowGrade = double.MaxValue;
+            Statistics result = new Statistics();
+            result.Average = 0.0;
+            result.High = double.MinValue;
+            result.Low = double.MaxValue;
 
-            foreach (double number in grades)
+            foreach (double grade in grades)
             {
-                lowGrade = Math.Min(number, lowGrade);
-                highGrade = Math.Max(number, highGrade);
-                result += number;
+                result.Low = Math.Min(grade, result.Low);
+                result.High = Math.Max(grade, result.High);
+                result.Average += grade;
             }
 
-            result /= grades.Count;
+            result.Average /= grades.Count;
 
-            Console.WriteLine($"The lowest grade is {lowGrade:N1}");
-            Console.WriteLine($"The highest grade is {highGrade:N1}");
-            Console.WriteLine($"The average grade is {result:N1}");
+            return result;
         }
     }
 }
