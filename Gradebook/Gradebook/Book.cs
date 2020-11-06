@@ -43,6 +43,29 @@ namespace Gradebook
 
             result.Average /= grades.Count;
 
+            switch(result.Average)
+            {
+                case double a when a >= 90.0:
+                    result.Letter = 'A';
+                    break;
+
+                case double a when a >= 80.0:
+                    result.Letter = 'B';
+                    break;
+
+                case double a when a >= 70.0:
+                    result.Letter = 'C';
+                    break;
+
+                case double a when a >= 60.0:
+                    result.Letter = 'D';
+                    break;
+
+                default:
+                    result.Letter = 'F';
+                    break;
+            }
+
             return result;
         }
     }
