@@ -4,10 +4,11 @@ using System.Text;
 
 namespace Gradebook
 {
+    public delegate void GradeAddedDelegate(object sender, EventArgs args);
+
     public class InMemoryBook : Book
     {
         private List<double> grades;
-        public delegate void GradeAddedDelegate(object sender, EventArgs args);
 
         public InMemoryBook(string name) : base(name)
         {
@@ -32,9 +33,9 @@ namespace Gradebook
             }
         }
 
-        public event GradeAddedDelegate GradeAdded;
+        public override event GradeAddedDelegate GradeAdded;
         
-        public Statistics GetStatistics()
+        public override Statistics GetStatistics()
         {
             Statistics result = new Statistics();
             result.Average = 0.0;
