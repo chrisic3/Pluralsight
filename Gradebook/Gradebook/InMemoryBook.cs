@@ -32,8 +32,6 @@ namespace Gradebook
                 throw new ArgumentException($"Invalid {nameof(grade)}");
             }
         }
-
-        public override event GradeAddedDelegate GradeAdded;
         
         public override Statistics GetStatistics()
         {
@@ -76,5 +74,8 @@ namespace Gradebook
 
             return result;
         }
+
+
+        public override event GradeAddedDelegate GradeAdded;
     }
 }
