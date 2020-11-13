@@ -13,9 +13,9 @@ namespace Gradebook
 
         public override void AddGrade(double grade)
         {
-            using (StreamWriter output = File.AppendText($"{this.Name}.txt"))
+            using (StreamWriter writer = File.AppendText($"{this.Name}.txt"))
             {
-                output.WriteLine(grade);
+                writer.WriteLine(grade);
 
                 if (GradeAdded != null)
                 {
@@ -26,7 +26,21 @@ namespace Gradebook
 
         public override Statistics GetStatistics()
         {
-            throw new NotImplementedException();
+            Statistics result = new Statistics();
+
+            using (StreamReader reader = File.OpenText($"{this.Name}.txt"))
+            {
+                string line = reader.ReadLine();
+
+                while (line != null)
+                {
+                    double grade = double.Parse(line);
+                    result.Add(grade);
+                    line = reader.ReadLine();
+                }
+            }
+
+            return result;
         }
 
         public override event GradeAddedDelegate GradeAdded;
