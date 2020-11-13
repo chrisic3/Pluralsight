@@ -4,9 +4,8 @@ using System.Text;
 
 namespace Gradebook
 {
-    public class Book
+    public class Book : NamedObject
     {
-        public string Name;
         private List<double> grades;
         public delegate void GradeAddedDelegate(object sender, EventArgs args);
 
